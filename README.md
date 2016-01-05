@@ -4,10 +4,10 @@
 **Рабочие ссылки на всякие полезности:**
 
 1. *ГОСТ 7.32*: http://www.pa-academy.kz/images/Dis.Sovet/GOST_7.32-2001.pdf
-2. Two
-3. Three
-4. Four
-5. Five
+2. *Уже созданный стиль LaTeX для ГОСТ 7.32* https://github.com/rominf/latex-g7-32
+3. *Методичка Сверстай диплом красиво* http://www.stolyarov.info/books/pdf/latex3days.pdf
+4. *Первая из цикла статей Как оформить диплом в LaTeX* http://mydebianblog.blogspot.ru/2008/11/latex.html
+5. *Статья по изменению шрифтов для оформления по ГОСТу (но что-то подсказывает, что он переопределяет команды уже готового проекта)* http://samolisov.blogspot.ru/2008/06/latex_09.html
 6. Six
 
 **Текущие задачи:**
