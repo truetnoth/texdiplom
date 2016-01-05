@@ -3,7 +3,7 @@
 
 **Рабочие ссылки на всякие полезности:**
 
-1. One
+1. *ГОСТ 7.32*: http://www.pa-academy.kz/images/Dis.Sovet/GOST_7.32-2001.pdf
 2. Two
 3. Three
 4. Four
