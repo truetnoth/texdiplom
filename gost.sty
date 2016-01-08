@@ -1,11 +1,35 @@
 %Необходимые пакеты
-\RequirePackage{amsmath,graphicx,amsfonts,euscript,amssymb,ulem}
+\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem, misccorr}
 \RequirePackage[utf8]{inputenc}
+\RequirePackage{caption}
 \RequirePackage[russian]{babel}
 
 %Основные параметры страниц
 \pagestyle{plain}
-\topmargin=2cm
-\rightmargin=1cm
-\bottommargin=2cm
-\leftmargin=3cm
+%это не скомпилировалось...
+%\topmargin=2cm
+%\rightmargin=1cm
+%\bottommargin=2cm
+%\leftmargin=3cm
+
+%установка полей
+\setpapersize{A4}
+\setmarginsrb{3cm}{2cm}{1cm}{2cm}{0pt}{0mm}{0pt}{13mm}
+%установка разделителя между номером рисунка/таблицы. Вместо точки должен быть дефис
+\DeclareCaptionLabelSeparator{defis}{ -- }
+\captionsetup{labelsep=defis, singlelinecheck=false}
+%название рисунка посередине
+\captionsetup[figure]{justification=centering}
+
+%подпись таблицы, по левому краю в формате Таблиц 1 - Название
+\def \gostTable #1{
+		\caption{#1}
+	}
+	
+%подпись рисунков в формате Рисунок 1 - Название
+\def \gostImage #1#2{
+	\begin{figure}
+		#2
+		\caption{#1}
+	\end{figure}
+}
