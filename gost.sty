@@ -1,31 +1,33 @@
 %Необходимые пакеты
-\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem, misccorr}
+\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{caption}
 \RequirePackage[russian]{babel}
-
+\RequirePackage[explicit]{titlesec}
+\ExecuteOptions{a4paper,12pt}
 %Основные параметры страниц
 \pagestyle{plain}
-%это не скомпилировалось...
-%\topmargin=2cm
-%\rightmargin=1cm
-%\bottommargin=2cm
-%\leftmargin=3cm
-
-%установка полей
 \setpapersize{A4}
+%установка полей
 \setmarginsrb{3cm}{2cm}{1cm}{2cm}{0pt}{0mm}{0pt}{13mm}
+\setlength\parindent{15mm}
+%междустрочный интервал
+\linespread{1.3}
 %установка разделителя между номером рисунка/таблицы. Вместо точки должен быть дефис
 \DeclareCaptionLabelSeparator{defis}{ -- }
 \captionsetup{labelsep=defis, singlelinecheck=false}
 %название рисунка посередине
 \captionsetup[figure]{justification=centering}
-
+%сквозная нумерация
+\captionsetup{figurewithin=none}
+%абзацные отступы перед заголовками
+\titlespacing{\section}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
+\titlespacing{\subsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
+\titlespacing{\subsubsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
 %подпись таблицы, по левому краю в формате Таблиц 1 - Название
 \def \gostTable #1{
 		\caption{#1}
 	}
-	
 %подпись рисунков в формате Рисунок 1 - Название
 \def \gostImage #1#2{
 	\begin{figure}
@@ -33,3 +35,38 @@
 		\caption{#1}
 	\end{figure}
 }
+%установка шрифта без засечек
+\def \gostSection #1{\sffamily \large #1}
+%установка шрифта для основного текста
+\def \mainText {
+	\rmfamily \large}
+%команда для структурных заголовков (ВВЕДЕНИЕ, ЗАКЛЮЧЕНИЕ, СПИСОК ЛИТЕРАТУРЫ)
+\newcommand\Chapter[1]{
+	\pagebreak
+	\refstepcounter{chapter}
+	\section*{\centering{\gostSection{#1}}
+	}
+	\addcontentsline{toc}{section}{%
+		\rmfamily \large #1}
+}
+
+%разрыв страницы для нового раздела
+\newcommand\Section[1]{
+	\pagebreak
+	\section{ \gostSection{\large #1}}
+}
+\newcommand\Subsection[1]{
+	\subsection{\normalsize \gostSection{ #1}}
+	}
+\newcommand\Subsubsection[1]{
+	\subsubsection{\normalsize \gostSection{#1}}
+	}
+%переопределение нумерации разделов
+\renewcommand{\thesection} {\sffamily \large \arabic{section}}
+%отступы заголовков (абзацный, до, после)
+\newlength\GostAfterTitleSkip    \setlength\GostAfterTitleSkip    {3.2ex}%15mm}
+\newlength\GostBetweenTitleSkip  \setlength\GostBetweenTitleSkip  {1.8ex}%8mm}
+\newlength\GostBeforeTitleSkip    \setlength\GostBeforeTitleSkip    {1.8ex}%\GostAfterTitleSkip}
+\newlength\GostBeforeNoTitleSkip  \setlength\GostBeforeNoTitleSkip  {1.0ex}
+\newlength\GostHTitleSpace       \setlength\GostHTitleSpace       {2mm}
+\newlength\GostTitleIndent       \setlength\GostTitleIndent       {\parindent}
