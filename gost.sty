@@ -24,6 +24,8 @@
 \titlespacing{\section}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
 \titlespacing{\subsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
 \titlespacing{\subsubsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
+\setcounter{tocdepth}{4}
+
 %подпись таблицы, по левому краю в формате Таблиц 1 - Название
 \def \gostTable #1{
 		\caption{#1}
@@ -36,7 +38,7 @@
 	\end{figure}
 }
 %установка шрифта без засечек
-\def \gostSection #1{\sffamily \large #1}
+\def \gostSection #1{\sffamily #1}
 %установка шрифта для основного текста
 \def \mainText {
 	\rmfamily \large}
@@ -44,7 +46,7 @@
 \newcommand\Chapter[1]{
 	\pagebreak
 	\refstepcounter{chapter}
-	\section*{\centering{\gostSection{#1}}
+	\section*{\centering{\gostSection{\large #1}}
 	}
 	\addcontentsline{toc}{section}{%
 		\rmfamily \large #1}
@@ -53,14 +55,28 @@
 %разрыв страницы для нового раздела
 \newcommand\Section[1]{
 	\pagebreak
-	\section{ \gostSection{\large #1}}
+	\refstepcounter{section}
+	\section*{\sffamily \large \arabic{section} \gostSection{\large #1}}
+	\addcontentsline{toc}{section}{%
+		\rmfamily \large \arabic{section} #1
+		}
 }
 \newcommand\Subsection[1]{
-	\subsection{\normalsize \gostSection{ #1}}
+	\refstepcounter{subsection}
+	\subsection*{ \sffamily \normalsize \arabic{section}.\arabic{subsection} \gostSection{\normalsize #1}}
+	\addcontentsline{toc}{subsection}{%
+	\rmfamily \large \arabic{section}.\arabic{subsection} #1
+			}
 	}
 \newcommand\Subsubsection[1]{
-	\subsubsection{\normalsize \gostSection{#1}}
+	\refstepcounter{subsubsection}
+	\subsubsection*{
+		 \sffamily \normalsize \arabic{section}.\arabic{subsection}.\arabic{subsubsection} \gostSection{\normalsize #1}
 	}
+		\addcontentsline{toc}{subsubsection}{%
+		\rmfamily \large  \arabic{section}.\arabic{subsection}.\arabic{subsubsection} #1
+			}
+		}
 %переопределение нумерации разделов
 \renewcommand{\thesection} {\sffamily \large \arabic{section}}
 %отступы заголовков (абзацный, до, после)
