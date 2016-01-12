@@ -1,5 +1,5 @@
 %Необходимые пакеты
-\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem}
+\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem, longtable}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{caption}
 \RequirePackage[russian]{babel}
@@ -7,6 +7,7 @@
 \ExecuteOptions{a4paper,12pt}
 %Основные параметры страниц
 \pagestyle{plain}
+\setcounter{secnumdepth}{3}
 \setpapersize{A4}
 %установка полей
 \setmarginsrb{3cm}{2cm}{1cm}{2cm}{0pt}{0mm}{0pt}{13mm}
@@ -20,6 +21,7 @@
 \captionsetup[figure]{justification=centering}
 %сквозная нумерация
 \captionsetup{figurewithin=none}
+\captionsetup{tablewithin=none}
 %абзацные отступы перед заголовками
 \titlespacing{\section}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
 \titlespacing{\subsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
@@ -30,6 +32,11 @@
 \def \gostTable #1{
 		\caption{#1}
 	}
+%подпись продолжения таблицы по левому краю
+\def \gostLongTable #1{
+	\caption*{Продолжение таблицы #1}
+}
+
 %подпись рисунков в формате Рисунок 1 - Название
 \def \gostImage #1#2{
 	\begin{figure}
