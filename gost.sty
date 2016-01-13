@@ -38,17 +38,20 @@
 }
 
 %подпись рисунков в формате Рисунок 1 - Название
-\def \gostImage #1#2{
-	\begin{figure}
-		#2
-		\caption{#1}
-	\end{figure}
+\def \gostImage #1{
+	\renewcommand\figurename{Рисунок}
+		\large \caption{#1}
 }
 %установка шрифта без засечек
 \def \gostSection #1{\sffamily #1}
 %установка шрифта для основного текста
 \def \mainText {
 	\rmfamily \large}
+	
+%команда дублирования знаков при переносе формул
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
 %команда для структурных заголовков (ВВЕДЕНИЕ, ЗАКЛЮЧЕНИЕ, СПИСОК ЛИТЕРАТУРЫ)
 \newcommand\Chapter[1]{
 	\pagebreak
@@ -84,6 +87,21 @@
 		\rmfamily \large  \arabic{section}.\arabic{subsection}.\arabic{subsubsection} #1
 			}
 		}
+		
+%нумерация перечислений с важностью порядка пунктов		
+\def \gostEnumPriority{
+	\renewcommand{\labelenumi}{ \asbuk{enumi}) }
+	\renewcommand{\labelenumii}{\arabic{enumii})}
+}
+%нумерация перечислений без приоритетности пунктов
+\def \gostEnum{
+	\renewcommand{\labelenumi}{ -- }
+	\renewcommand{\labelenumii}{\arabic{enumii})}
+}		
+
+%нумерация списка литературы
+\renewcommand\@biblabel[1]{#1 }
+
 %переопределение нумерации разделов
 \renewcommand{\thesection} {\sffamily \large \arabic{section}}
 %отступы заголовков (абзацный, до, после)
@@ -93,3 +111,9 @@
 \newlength\GostBeforeNoTitleSkip  \setlength\GostBeforeNoTitleSkip  {1.0ex}
 \newlength\GostHTitleSpace       \setlength\GostHTitleSpace       {2mm}
 \newlength\GostTitleIndent       \setlength\GostTitleIndent       {\parindent}
+
+%между заголовками
+\setlength\Gost@TitleDropSkip{\GostBetweenTitleSkip}
+\addtolength\Gost@TitleDropSkip{-1.2ex}
+%команда между двумя заголовками
+\newcommand\ttl{\vspace{\Gost@TitleDropSkip}}
