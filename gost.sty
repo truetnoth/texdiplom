@@ -1,5 +1,5 @@
 %Необходимые пакеты
-\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem, longtable}
+\RequirePackage{indentfirst,vmargin,amsmath,graphicx,amsfonts,euscript,amssymb,ulem, longtable, textcomp}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{caption}
 \RequirePackage[russian]{babel}
@@ -7,10 +7,13 @@
 \ExecuteOptions{a4paper,12pt}
 %Основные параметры страниц
 \pagestyle{plain}
+%нумерация
 \setcounter{secnumdepth}{3}
+%установка размера страницы
 \setpapersize{A4}
 %установка полей
 \setmarginsrb{3cm}{2cm}{1cm}{2cm}{0pt}{0mm}{0pt}{13mm}
+%абзац
 \setlength\parindent{15mm}
 %междустрочный интервал
 \linespread{1.3}
@@ -26,7 +29,11 @@
 \titlespacing{\section}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
 \titlespacing{\subsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
 \titlespacing{\subsubsection}{\GostTitleIndent}{\GostBeforeTitleSkip}{\GostAfterTitleSkip}
+%глубина оглавления
 \setcounter{tocdepth}{4}
+
+%на всякий случай, изменение оглавления списка литературы
+\renewcommand\bibname{\centering \large \gostSection{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}}
 
 %подпись таблицы, по левому краю в формате Таблиц 1 - Название
 \def \gostTable #1{
@@ -60,6 +67,13 @@
 	}
 	\addcontentsline{toc}{section}{%
 		\rmfamily \large #1}
+}
+%не должны быть в оглавлении
+\newcommand\nChapter[1]{
+	\pagebreak
+	\refstepcounter{chapter}
+	\section*{\centering{\large \gostSection{\large #1}}
+	}
 }
 
 %разрыв страницы для нового раздела
@@ -104,6 +118,8 @@
 
 %переопределение нумерации разделов
 \renewcommand{\thesection} {\sffamily \large \arabic{section}}
+\renewcommand{\thesubsubsection} {\sffamily \normalsize \arabic{subsubsection}}
+\renewcommand{\theequation}{\arabic{equation}}%формулы
 %отступы заголовков (абзацный, до, после)
 \newlength\GostAfterTitleSkip    \setlength\GostAfterTitleSkip    {3.2ex}%15mm}
 \newlength\GostBetweenTitleSkip  \setlength\GostBetweenTitleSkip  {1.8ex}%8mm}
@@ -117,3 +133,122 @@
 \addtolength\Gost@TitleDropSkip{-1.2ex}
 %команда между двумя заголовками
 \newcommand\ttl{\vspace{\Gost@TitleDropSkip}}
+
+%Элементы титульной страницы
+\newcommand\Nir@UdkName{УДК}
+%номер госрегистрации
+\newcommand\Nir@No{%
+	\textnumero~госрегистрации%
+}
+
+\newcommand\Nir@Confirm{
+	{\small УТВЕРЖДАЮ}%
+}
+
+
+\newcommand\Nir@Otchet{{%
+		\large ОТЧЕТ \\
+		О{} НАУЧНО-%
+		ИССЛЕДОВАТЕЛЬСКОЙ{} %
+		РАБОТЕ%
+	}}
+\newcommand\Nir@AnnOtchet{ %отчёт аннотационный!?
+}
+\newcommand\Nir@MainBegin{%
+
+}
+\newcommand\Nir@OrgLongName{%
+	Полное~
+	название~
+	организации%
+}
+
+
+\newcommand\Nir@StageType{ % вид отчёта
+}
+
+\newcommand\Nir@BossPost{%
+	Кто \newline
+	утверждает%
+}
+
+
+\newcommand\Nir@InventarNo{
+	Инв.~\textnumero
+}
+
+
+\newcommand\Nir@BossName{Ф.~И.~О}
+\newcommand\Nir@Year{\the\year}
+\newcommand\Nir@Town{Город}
+\newcommand\Nir@ManagerPost{%
+	большой{}
+	начальник%
+}
+
+\newcommand\Nir@ManagerName{Иванов} %руководитель НИР
+
+%просто создание главы
+\newcommand\Executors{%список исполнителей
+\nChapter{СПИСОК~%
+	ИСПОЛНИТЕЛЕЙ}%
+}
+%генерация титульного листа
+\newcommand\NirTitle[1]{
+	\sffamily
+ 	\thispagestyle{empty}
+	\begin{center}
+		\linespread{1.1} \large
+		{\sffamily \Nir@OrgLongName}		
+		 \vfill
+		 
+		 \begin{tabular}{p{80mm}p{80mm}}
+		 	%\linespread{1.3}
+		 	\Nir@UdkName \newline 
+		 	\Nir@No \newline 
+		 	\Nir@InventarNo \newline 
+		 	&
+		 	\centering\Nir@Confirm \newline
+		
+		 	\raggedright
+		 	\Nir@BossPost \newline \newline
+		 	\underline{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \Nir@BossName \newline \newline
+		 	<<\underline{~~~~}>>\underline{~~~~~~~~~~~~~~~~~~~~~~~~} \Nir@Year~г.
+		 \end{tabular}
+		 \vfill
+			\Nir@AnnOtchet \Nir@Otchet
+		
+		\vspace{10pt}
+		#1 \\
+		(\Nir@StageType)
+		\vspace{10pt}		
+		
+			\vfill
+		\begin{tabular}{p{80mm}p{80mm}}
+
+			
+			\Nir@ManagerPost
+			&
+			{~\underline{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~} \Nir@ManagerName 
+				
+			\hspace{12mm} подпись, дата}
+		\end{tabular}
+		\vfill
+		\vfill
+		\Nir@Town~\Nir@Year
+		
+	\end{center}
+%	\linespread{\Gost@LineSpread}\normalsize
+}
+
+	
+%Эти команды нужно вызвать для корректного определения титульной страницы
+\newcommand\gostStage[1]{\renewcommand\Nir@StageType{#1}}%%virens added: 
+\newcommand\gostIsAnnotacion[1]{\renewcommand\Nir@AnnOtchet{#1}} %%Если отчёт аннотационный
+\newcommand\gostOrgLongName[1]{\renewcommand\Nir@OrgLongName{#1}}%полное название организации
+\newcommand\gostBoss[2]{\renewcommand\Nir@BossPost{#1}\renewcommand\Nir@BossName{#2}}%утвердитель НИР
+\newcommand\gostYear[1]{\renewcommand\Nir@Year{#1}}
+\newcommand\gostManager[2]{\renewcommand\Nir@ManagerPost{#1}\renewcommand\Nir@ManagerName{#2}}%руководитель НИР
+\newcommand\gostTown[1]{\renewcommand\Nir@Town{#1}}%%virens added: указываем город написания отчёта
+\newcommand\gostUdk[1]{\renewcommand\Nir@UdkName{#1}}%%virens added: для изменения УДК в тексте документа
+\newcommand\gostGosNo[1]{\renewcommand\Nir@No{#1}}%%virens added: номер госрегистрации
